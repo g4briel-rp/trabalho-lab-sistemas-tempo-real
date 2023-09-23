@@ -1,0 +1,46 @@
+-------------ls------------
+ls
+ls -laSh --group-directories-first
+ls -l *.extensao
+
+-------------mkdir------------
+mkdir nova pasta -> criar duas pastas
+mkdir "nova pasta" -> criar uma pasta
+mkdir -m 755 /path/to/directory
+
+
+-------------man------------
+man 7 man
+man -f ls
+-------------pwd------------
+pwd -L
+pwd -P
+-------------cd------------
+cd ..
+cd ./diretorio
+cd Área\ de\ Trabalho/
+-------------rm------------
+rm teste.txt
+rm -rf teste
+
+-------------touch------------
+touch teste
+touch *
+touch -t 05011231 teste --Para alterar as datas de modificação e de acesso do arquivo teste para 12:31 do dia 01/05 do ano corrente, digite
+-------------cp------------
+cp --version
+cp /etc/passwd /mnt/backup/
+cp -i /etc/passwd /mnt/backup/ --Se você deseja copiar os arquivos de um lugar para outro interativamente, então use a opção “-i” no comando cp, a opção interativa só funciona se o diretório de destino já tiver o mesmo arquivo
+-------------mv------------
+mv teste.txt teste2.txt
+mv arquivo1 /tmp
+mv arquivo1 ../
+mv MV.txt VM.txt -O
+-------------date------------
+date
+date -u --datas no formato UTC
+date +'Hoje é %A, %d de %B de %Y, o %j dia do ano, as %H:%M'
+date +%Y%m%d -s "2019-05-11"
+-------------cal------------
+
+-------------uname------------

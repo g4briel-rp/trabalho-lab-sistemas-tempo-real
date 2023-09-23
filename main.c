@@ -3,18 +3,28 @@
 #include <unistd.h>
 #include <string.h>
 
-void run(char *search, char *comando, char *parametro)
+void run(char *search, char *comando)
 {
-    // arrumar para quando tiver mais de um parametro
-    char *aux;
+    int index = 1;
+    char *parametro;
+    char *save[30];
 
-    do
+    save[0] = comando;
+    parametro = strtok(NULL, search);
+
+    while (parametro != NULL)
     {
-        aux = strtok(NULL, search);
-        strcat(parametro, aux);
-    } while (aux != NULL);
+        parametro[strcspn(parametro, "\n")] = 0;
+        // printf("%s\n", parametro);
+        save[index] = parametro;
+        index++;
+        parametro = strtok(NULL, search);
+    }
 
-    printf("%s\n", parametro);
+    save[index] = NULL;
+
+    int ret;
+    ret = execvp(save[0], save);
 
     // int ret;
     // if (parametro = strtok(NULL, search)) //  comando + parametro
@@ -30,11 +40,46 @@ void run(char *search, char *comando, char *parametro)
     // }
 }
 
+void run_mkdir(char *search, char *comando)
+{
+    int index = 1, ret;
+    char *parametro;
+    char *save[30];
+
+    save[0] = comando;
+    parametro = strtok(NULL, "");
+
+    if (strstr(parametro, "\"") != NULL)
+    {
+        parametro[strcspn(parametro, "\n")] = 0;
+        memmove(parametro, parametro + 1, strlen(parametro));
+        parametro[strlen(parametro) - 1] = '\0';
+        // printf("%s", parametro);
+        save[index] = parametro;
+        index++;
+    }
+    else // quando não tem aspas
+    {
+        parametro = strtok(parametro, search);
+        while (parametro != NULL)
+        {
+            parametro[strcspn(parametro, "\n")] = 0;
+            // printf("%s\n", parametro);
+            save[index] = parametro;
+            index++;
+            parametro = strtok(NULL, search);
+        }
+    }
+
+    save[index] = NULL;
+
+    ret = execvp(save[0], save);
+}
+
 int main(int argc, char *argv[])
 {
     char linha[100];
     char *comando;
-    char *parametro;
     char *search = " ";
 
     do
@@ -51,15 +96,15 @@ int main(int argc, char *argv[])
 
         if (strcmp(comando, "ls") == 0)
         {
-            run(search, comando, parametro);
+            run(search, comando);
         }
         else if (strcmp(comando, "mkdir") == 0)
         {
-            run(search, comando, parametro);
+            run_mkdir(search, comando);
         }
         else if (strcmp(comando, "man") == 0)
         {
-            run(search, comando, parametro);
+            run(search, comando);
         }
         else if (strcmp(comando, "pwd") == 0)
         {
