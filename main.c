@@ -3,13 +3,39 @@
 #include <unistd.h>
 #include <string.h>
 
+void run(char *search, char *comando, char *parametro)
+{
+    // arrumar para quando tiver mais de um parametro
+    char *aux;
+
+    do
+    {
+        aux = strtok(NULL, search);
+        strcat(parametro, aux);
+    } while (aux != NULL);
+
+    printf("%s\n", parametro);
+
+    // int ret;
+    // if (parametro = strtok(NULL, search)) //  comando + parametro
+    // {
+    //     parametro[strcspn(parametro, "\n")] = 0;
+    //     char *cmd[] = {comando, parametro, (char *)0};
+    //     ret = execvp(cmd[0], cmd);
+    // }
+    // else // somente o comando
+    // {
+    //     char *cmd[] = {comando, NULL};
+    //     ret = execvp(cmd[0], cmd);
+    // }
+}
+
 int main(int argc, char *argv[])
 {
     char linha[100];
     char *comando;
     char *parametro;
     char *search = " ";
-    int ret;
 
     do
     {
@@ -20,31 +46,20 @@ int main(int argc, char *argv[])
 
         comando = strtok(linha, search);
         comando[strcspn(comando, "\n")] = 0;
-
         // printf("%s\n", comando);
         // printf("%s\n", parametro);
 
         if (strcmp(comando, "ls") == 0)
         {
-            if (parametro = strtok(NULL, search)) //  comando + parametro
-            {
-                parametro[strcspn(parametro, "\n")] = 0;
-                char *cmd[] = {comando, parametro, (char *)0};
-                ret = execvp(cmd[0], cmd);
-            }
-            else // somente o comando
-            {
-                char *cmd[] = {comando, NULL};
-                ret = execvp(cmd[0], cmd);
-            }
+            run(search, comando, parametro);
         }
         else if (strcmp(comando, "mkdir") == 0)
         {
-            printf("mkdir\n");
+            run(search, comando, parametro);
         }
         else if (strcmp(comando, "man") == 0)
         {
-            printf("man\n");
+            run(search, comando, parametro);
         }
         else if (strcmp(comando, "pwd") == 0)
         {
