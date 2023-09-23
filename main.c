@@ -19,16 +19,24 @@ int main(int argc, char *argv[])
         // perror(linha);
 
         comando = strtok(linha, search);
-        parametro = strtok(NULL, search);
         comando[strcspn(comando, "\n")] = 0;
 
-        // printf("%s", comando);
-        // printf("%s", parametro);
+        // printf("%s\n", comando);
+        // printf("%s\n", parametro);
 
         if (strcmp(comando, "ls") == 0)
         {
-            char *cmd[] = {comando, parametro, (char *)0};
-            ret = execvp(comando, cmd);
+            if (parametro = strtok(NULL, search)) //  comando + parametro
+            {
+                parametro[strcspn(parametro, "\n")] = 0;
+                char *cmd[] = {comando, parametro, (char *)0};
+                ret = execvp(cmd[0], cmd);
+            }
+            else // somente o comando
+            {
+                char *cmd[] = {comando, NULL};
+                ret = execvp(cmd[0], cmd);
+            }
         }
         else if (strcmp(comando, "mkdir") == 0)
         {
