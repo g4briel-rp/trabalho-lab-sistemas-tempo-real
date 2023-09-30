@@ -38,7 +38,7 @@ void run(char *search, char *comando, char *parametro)
 int main(int argc, char *argv[])
 {
     pid_t pid;
-    char linha[100];
+    char linha[100], copia[100];
     char *comando;
     char *parametro;
     char *search = " ";
@@ -47,6 +47,7 @@ int main(int argc, char *argv[])
     {
         printf("$ ");
         fgets(linha, 100, stdin);
+        strcpy(copia, linha);
         linha[strcspn(linha, "\n")] = 0; // Remove o caractere de nova linha
 
         comando = strtok(linha, search);
@@ -77,7 +78,14 @@ int main(int argc, char *argv[])
             }
             else if (pid == 0)
             {
-                run(search, comando, parametro);
+                if (strcmp(comando, "mkdir") == 0)
+                {
+                    system(copia);
+                }
+                else
+                {
+                    run(search, comando, parametro);
+                }
                 exit(0);
             }
             else
