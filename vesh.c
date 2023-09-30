@@ -80,7 +80,11 @@ int main(int argc, char *argv[])
             {
                 if (strcmp(comando, "mkdir") == 0)
                 {
-                    system(copia);
+                    int ret = system(copia);
+                    if(ret != 0){
+                        fprintf(stderr, "mkdir: falha ao criar diretório\n");
+                        exit(EXIT_FAILURE);
+                    }
                 }
                 else
                 {
