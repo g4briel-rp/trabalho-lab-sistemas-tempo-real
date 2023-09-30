@@ -2,13 +2,10 @@
 ls
 ls -laSh --group-directories-first
 ls -l *.extensao
-
 -------------mkdir------------
 mkdir nova pasta -> criar duas pastas
 mkdir "nova pasta" -> criar uma pasta
 mkdir -m 755 /path/to/directory
-
-
 -------------man------------
 man 7 man
 man -f ls
@@ -22,7 +19,6 @@ cd Área\ de\ Trabalho/
 -------------rm------------
 rm teste.txt
 rm -rf teste
-
 -------------touch------------
 touch teste
 touch *
